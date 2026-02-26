@@ -1,28 +1,18 @@
 package base
 
 func Mono(nums []int) bool {
-	increasing := false
-	started := false
+	up, down := true, true
+
 	for i := 1; i < len(nums); i++ {
-		if nums[i] == nums[i-1] {
-			continue
-		}
-
 		if nums[i] < nums[i-1] {
-			if increasing && started {
-				return false
-			}
-			started = true
+			up = false
 		}
-
 		if nums[i] > nums[i-1] {
-			if !increasing && started {
-				return false
-			}
-			increasing = true
-			started = true
+			down = false
+		}
+		if !up && !down {
+			return false
 		}
 	}
-
 	return true
 }
